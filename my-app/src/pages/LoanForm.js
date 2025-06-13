@@ -5,6 +5,7 @@ import { InputContext } from "@/contexts/InputContext";
 
 export default function LoanForm() {
 
+
     const [text, setText] = useState({
         name: "",
         phone: "",
@@ -13,26 +14,26 @@ export default function LoanForm() {
         select: "",
     });
 
-    const [errorMessage, setErrorMessage] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const btnIsDisabled = text.name == "" || text.phone == "" || text.age == "";
 
 
     function handlNameInputChange(value) {
         setText({ ...text, name: value });
-    }
+    };
 
     function handlPhoneInputChange(value) {
         setText({ ...text, phone: value });
-    }
+    };
 
     function handlAgeInputChange(value) {
         setText({ ...text, age: value });
-    }
+    };
 
     function handlBoxInputChange(value) {
         setText({ ...text, isChecked: value });
-    }
+    };
     return (
         <>
             <div className="bg-white px-5 py-10 md:p-20 rounded-lg w-[90%] md:w-[70%]">
@@ -42,8 +43,14 @@ export default function LoanForm() {
 
                     if (text.age < 12 || text.age > 80) {
                         setErrorMessage("Your age is not allowed");
+                            setTimeout( () => {
+                                location.reload();
+                            }, 2000 );                      
                     } else if (text.phone.length > 10) {
-                        setErrorMessage("Phone number is incorrect")
+                        setErrorMessage("Phone number is incorrect");
+                            setTimeout( () => {
+                                location.reload();
+                            }, 2000 );  
                     }
                     setShowModal(true);
                     setText({
@@ -52,7 +59,8 @@ export default function LoanForm() {
                         age: "",
                         isChecked: false,
                         select: "",
-                    })
+                    });
+
                 }}>
                     <h1 className="text-2xl md:text-4xl font-bold ">{showModal === true ? `Welcome, ${text.name}` : "Requesting a Loan to get your money"}</h1>
 
